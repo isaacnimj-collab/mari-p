@@ -1,0 +1,506 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>For Mari♡</title>
+    <link rel="shortcut icon" href="ico.png" type="image/x-icon">
+    <style>
+        body {
+            height: 100vh; /* Usar vh para asegurar que cubra toda la altura */
+            width: 100%;
+            background: #080f1a;
+            overflow: hidden;
+            display: flex; /* Para centrar la flor más fácilmente */
+            justify-content: center;
+            align-items: center;
+            margin: 0;
+        }
+
+        .container {
+            position: relative;
+            transform: scale(1.4); /* Aumentado de 0.8 a 1 */
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                transform: scale(2); /* Antes 0.6, ahora un poco más grande en móviles */
+            }
+            .texto {
+                font-size: 18px; /* Subido un poco */
+            }
+        }
+        /* Media queries para pantallas pequeñas */
+
+
+        .glass {
+            height: 480px; /* Reducido de 800px */
+            width: 360px; /* Reducido de 600px */
+            background: #122139;
+            border-radius: 180px 180px 0px 0px; /* Reducido proporcionalmente */
+            position: relative; /* Asegura el posicionamiento de after/before */
+        }
+
+        .glass:before {
+            content: "";
+            height: 24px; /* Reducido */
+            width: 24px; /* Reducido */
+            transform-origin: center;
+            border: 15px solid #122139; /* Reducido */
+            border-radius: 100%;
+            position: absolute;
+            left: 147px; /* Ajustado */
+            top: -45px; /* Ajustado */
+        }
+
+        .glass:after {
+            content: "";
+            position: absolute;
+            height: 9px; /* Reducido */
+            width: 100%; /* Mantiene 100% del ancho del .glass */
+            background: #a52a2a;
+            top: 100%;
+            left: 0%;
+        }
+
+        .shine {
+            width: 16px; /* Reducido */
+            height: 198px; /* Reducido */
+            background: white;
+            opacity: 0.2;
+            position: absolute;
+            left: 85%;
+            top: 120px; /* Reducido */
+            border-radius: 100px;
+            z-index: 10;
+        }
+
+        .shine:before {
+            content: "";
+            width: 16px; /* Reducido */
+            height: 24px; /* Reducido */
+            position: absolute;
+            background: white;
+            top: 219px; /* Ajustado */
+            border-radius: 100px;
+        }
+
+        /* Colores de pétalos cambiados a amarillo/dorado */
+        .petals>div {
+            position: absolute;
+            background: #FFD700;
+            width: 51px; /* Reducido de 85px */
+            height: 72px; /* Reducido de 120px */
+            top: 120px; /* Ajustado a la nueva altura */
+            transition: all 0.5s ease-out;
+        }
+
+        .petals>div:nth-child(1) {
+            border-radius: 9px; /* Reducido */
+            box-shadow: 0px 0px 36px rgba(255, 255, 0, 1); /* Sombra ajustada */
+            left: 161px; /* Ajustado */
+            top: 120px; /* Ajustado */
+            background: #FFD700;
+        }
+        
+        /* Tonos para dar profundidad a los pétalos */
+        .petals>div:nth-child(2),
+        .petals>div:nth-child(4),
+        .petals>div:nth-child(6) {
+            background: #FFC300;
+            left: 138px; /* Ajustado */
+            border-radius: 0px 30px 0px 30px; /* Reducido */
+            transform-origin: bottom right;
+        }
+
+        .petals>div:nth-child(3),
+        .petals>div:nth-child(5),
+        .petals>div:nth-child(7) {
+            background: #FFC300;
+            left: 180px; /* Ajustado */
+            border-radius: 30px 0px 30px 0px; /* Reducido */
+            transform-origin: bottom left;
+        }
+
+        .petals>div:nth-child(2) {
+            z-index: 5;
+            background: #FFB000;
+            top: 130px; /* Ajustado */
+            height: 78px; /* Ajustado */
+            box-shadow: 0px 0px 36px rgba(255, 255, 0, .5);
+            animation: bloom2 3s ease-in-out;
+            animation-fill-mode: forwards;
+        }
+
+        .petals>div:nth-child(3) {
+            z-index: 4;
+            background: #FFB000;
+            top: 130px; /* Ajustado */
+            height: 78px; /* Ajustado */
+            box-shadow: 0px 0px 36px rgba(255, 255, 0, .5);
+            animation: bloom3 3s ease-in-out, glowing 2.5s ease-in-out infinite;
+            animation-fill-mode: forwards;
+        }
+
+        .petals>div:nth-child(4) {
+            z-index: 3;
+            background: #FFC300;
+            top: 128px; /* Ajustado */
+            height: 81px; /* Ajustado */
+            box-shadow: 0px 0px 36px rgba(255, 255, 0, .5);
+            animation: bloom4 3s ease-in-out, glowing 2.5s ease-in-out infinite;
+            animation-fill-mode: forwards;
+        }
+
+        .petals>div:nth-child(5) {
+            z-index: 2;
+            background: #FFC300;
+            top: 128px; /* Ajustado */
+            height: 81px; /* Ajustado */
+            box-shadow: 0px 0px 36px rgba(255, 255, 0, .5);
+            animation: bloom5 3s ease-in-out, glowing 2.5s ease-in-out infinite;
+            animation-fill-mode: forwards;
+        }
+
+        .petals>div:nth-child(6) {
+            z-index: 1;
+            background: #FFD700;
+            top: 120px; /* Ajustado */
+            height: 78px; /* Ajustado */
+            box-shadow: 0px 0px 36px rgba(255, 255, 0, .3);
+            animation: bloom6 3s ease-in-out, glowing 2.5s ease-in-out infinite;
+            animation-fill-mode: forwards;
+        }
+
+        .petals>div:nth-child(7) {
+            z-index: 0;
+            background: #FFD700;
+            top: 120px; /* Ajustado */
+            height: 78px; /* Ajustado */
+            box-shadow: 0px 0px 36px rgba(255, 255, 0, .3);
+            animation: bloom7 3s ease-in-out, glowing 2.5s ease-in-out infinite;
+            animation-fill-mode: forwards;
+        }
+
+        /* Pétalos cayendo cambiados a amarillo */
+        .deadPetals>div {
+            position: absolute;
+            background: #FFD700;
+            width: 12px; /* Reducido */
+            height: 9px; /* Reducido */
+            top: 120px; /* Ajustado */
+            border-radius: 0px 18px 0px 18px; /* Reducido */
+            box-shadow: 0px 0px 18px rgba(255, 255, 0, .5);
+            transition: all 0.5s ease-out;
+        }
+
+        .deadPetals>div:nth-child(1) {
+            left: 200px; /* Posición ajustada */
+            transform: rotate(-30deg);
+            animation: falling 20s 4s ease-in-out infinite;
+        }
+
+        .deadPetals>div:nth-child(2) {
+            left: 160px; /* Posición ajustada */
+            transform: rotate(-30deg);
+            animation: falling 20s 8s ease-in-out infinite;
+        }
+
+        .deadPetals>div:nth-child(3) {
+            left: 230px; /* Posición ajustada */
+            transform: rotate(-30deg);
+            animation: falling 20s 12s ease-in-out infinite;
+        }
+
+        .deadPetals>div:nth-child(4) {
+            left: 100px; /* Posición ajustada */
+            transform: rotate(-30deg);
+            animation: falling 20s 16s ease-in-out infinite;
+        }
+
+        /* Hojas y espinas (verde) */
+        .leaves>div:nth-last-child(1) {
+            position: absolute;
+            width: 33px; /* Reducido */
+            height: 18px; /* Reducido */
+            background: #338f37;
+            top: 200px; /* Ajustado */
+            left: 167px; /* Ajustado */
+            border-radius: 100px;
+        }
+
+        .leaves>div:nth-child(1) {
+            position: absolute;
+            width: 9px; /* Reducido */
+            height: 234px; /* Reducido */
+            background: #054c05;
+            top: 185px; /* Ajustado */
+            left: 180px; /* Ajustado */
+            border-radius: 0 0 100px 100px;
+        }
+
+        .leaves>div:nth-child(2) {
+            position: absolute;
+            width: 36px; /* Reducido */
+            height: 60px; /* Reducido */
+            top: 247px; /* Ajustado */
+            border-radius: 6px 48px 24px 48px; /* Reducido */
+            background: #054c05;
+            transform-origin: bottom;
+            transform: rotate(-30deg);
+            left: 152px; /* Ajustado */
+            box-shadow: inset 6px 6px #066406; /* Reducido */
+        }
+
+        .leaves>div:nth-child(3) {
+            position: absolute;
+            width: 36px; /* Reducido */
+            height: 60px; /* Reducido */
+            top: 216px; /* Ajustado */
+            border-radius: 48px 1px 48px 24px; /* Reducido */
+            background: #054c05;
+            transform-origin: bottom;
+            transform: rotate(30deg);
+            left: 180px; /* Ajustado */
+            box-shadow: inset -6px 6px #066406; /* Reducido */
+        }
+
+        .thorns>div {
+            position: absolute;
+            width: 0;
+            height: 0;
+            top: 120px; /* Ajustado */
+        }
+
+        .thorns>div:nth-child(odd) {
+            border-top: 9px solid transparent; /* Reducido */
+            border-bottom: 9px solid transparent; /* Reducido */
+            border-left: 9px solid #054c05; /* Reducido */
+            left: 189px; /* Ajustado */
+        }
+
+        .thorns>div:nth-child(even) {
+            border-top: 9px solid transparent; /* Reducido */
+            border-bottom: 9px solid transparent; /* Reducido */
+            border-right: 9px solid #054c05; /* Reducido */
+            left: 171px; /* Ajustado */
+        }
+
+        .thorns>div:nth-child(1) {
+            top: 279px; /* Ajustado */
+        }
+
+        .thorns>div:nth-child(2) {
+            top: 234px; /* Ajustado */
+        }
+
+        .thorns>div:nth-child(4) {
+            top: 315px; /* Ajustado */
+        }
+
+        @keyframes bloom2 {
+            50% {
+                transform: rotate(-90deg);
+                top: 240px; /* Ajustado */
+                left: 90px; /* Ajustado */
+            }
+
+            100% {
+                transform: rotate(-60deg);
+                top: 369px; /* Ajustado */
+                left: 60px; /* Ajustado */
+                background: #D4A017;
+                box-shadow: 0px 0px 0px rgba(255, 255, 0, 0);
+            }
+        }
+
+        @keyframes bloom3 {
+            100% {
+                transform: rotate(50deg);
+            }
+        }
+
+        @keyframes bloom4 {
+            100% {
+                transform: rotate(-25deg);
+            }
+        }
+
+        @keyframes bloom5 {
+            100% {
+                transform: rotate(25deg);
+            }
+        }
+
+        @keyframes bloom6 {
+            100% {
+                transform: rotate(-10deg);
+            }
+        }
+
+        @keyframes bloom7 {
+            100% {
+                transform: rotate(10deg);
+            }
+        }
+
+        @keyframes glowing {
+            50% {
+                background: #FFEB3B;
+                box-shadow: 0px 0px 36px rgba(255, 255, 0, 1); /* Ajustado */
+            }
+        }
+
+        @keyframes falling {
+            20% {
+                top: 201px; /* Ajustado */
+                background: #D4A017;
+                box-shadow: 0px 0px 0px rgba(255, 255, 0, 0);
+            }
+
+            100% {
+                top: 201px; /* Ajustado */
+                opacity: 0;
+            }
+        }
+
+        .texto {
+            top: 70%; /* Posición ajustada para el texto */
+            color: white;
+            font-size: 20px; /* Reducido de 35px */
+            position: absolute;
+            left: 50%; /* Centrado horizontal */
+            transform: translateX(-50%); /* Ajuste de centrado */
+            width: 100%;
+            text-align: center;
+        }
+        
+        
+        /* Botón de música */
+        #playBtn {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 10px 20px;
+            font-size: 18px;
+            border: none;
+            border-radius: 10px;
+            background-color: #FFD700;
+            color: #080f1a;
+            cursor: pointer;
+            z-index: 100;
+        }
+
+        /* Mensajes tipo lluvia */
+        .message {
+            position: absolute;
+            color: #FFD700;
+            font-weight: bold;
+            pointer-events: none;
+            white-space: nowrap;
+            font-size: 16px;
+            opacity: 0.8;
+            animation: fall linear infinite;
+        }
+
+        @keyframes fall {
+            0% {
+                transform: translateY(-50px) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="glass">
+            <div class="shine"></div>
+        </div>
+        <div class="thorns">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+        <div class="leaves">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+        <div class="petals">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+        
+    </div>
+    <div>
+        <h4 class="texto">Ten tu flor amarrilla solo por ser tu 💖</h4>
+    </div>
+     <!-- Botón de música -->
+    <button id="playBtn">🎵 Play Música</button>
+    <audio id="music" src="cancion.mp3"></audio>
+
+    <script>
+        const playBtn = document.getElementById('playBtn');
+        const music = document.getElementById('music');
+
+        playBtn.addEventListener('click', () => {
+            music.play();
+            startMessages();
+            playBtn.style.display = 'none';
+        });
+
+        const messagesArray = [
+            "Eres increíble 💛",
+            "Siempre sonríe 😊",
+            "Te quiero mucho 💖",
+            "Nunca dejes de soñar ✨",
+            "Eres única 🌸",
+            "Feliz día 🌼",
+            "Brillas mucho 💫"
+        ];
+
+        function startMessages() {
+    setInterval(() => {
+        const msg = document.createElement('div');
+        msg.classList.add('message');
+        msg.innerText = messagesArray[Math.floor(Math.random() * messagesArray.length)];
+
+        // Ajustar tamaño de fuente en móviles
+        if(window.innerWidth <= 600){
+            msg.style.fontSize = "14px";
+        }
+
+        // Calcular posición horizontal sin salirse de pantalla
+        const maxLeft = window.innerWidth - 120; // 120px es un estimado del ancho máximo del mensaje
+        msg.style.left = Math.random() * maxLeft + 'px';
+
+        // Duración aleatoria de la caída
+        msg.style.animationDuration = 5 + Math.random() * 5 + 's';
+
+        document.body.appendChild(msg);
+
+        setTimeout(() => {
+            msg.remove();
+        }, 10000);
+    }, 500);
+}
+
+    </script>
+</body>
+
+
+</html>
